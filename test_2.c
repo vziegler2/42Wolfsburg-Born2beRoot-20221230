@@ -25,9 +25,11 @@ long long timeInMilliseconds(void) {
     return (((long long)tv.tv_sec) * 1000) + (tv.tv_usec / 1000);
 }
 
+long long SEED = 0;
+
 int noise2(int x, int y)
 {
-    int tmp = hash[(y + timeInMilliseconds()) % 256];
+    int tmp = hash[(y + SEED) % 256];
     return hash[(tmp + x) % 256];
 }
 
@@ -89,6 +91,7 @@ int main(int argc, const char** argv)
 	}
 	x = atoi(argv[1]);
 	y = atoi(argv[2]);
+    SEED = timeInMilliseconds();
 	while (x-- > 0)
 	{
 		y = atoi(argv[2]);
